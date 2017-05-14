@@ -10,6 +10,7 @@ defmodule Concertrip.Mixfile do
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      aliases: aliases(),
+     preferred_cli_env: [espec: :test],
      deps: deps()]
   end
 
@@ -37,7 +38,9 @@ defmodule Concertrip.Mixfile do
      {:phoenix_html, "~> 2.6"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
-     {:cowboy, "~> 1.0"}]
+     {:cowboy, "~> 1.0"},
+     {:espec_phoenix, "~> 0.6.8", only: :test},
+   ]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
