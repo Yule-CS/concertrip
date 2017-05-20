@@ -1,7 +1,8 @@
 defmodule Concertrip.RoomController do
   use Concertrip.Web, :controller
 
-  alias Concertrip.Room
+  alias Concertrip.{Room, Whiteboard}
+  alias Ecto.Multi
 
   def index(conn, _params) do
     rooms = Repo.all(Room)
@@ -14,15 +15,14 @@ defmodule Concertrip.RoomController do
   end
 
   def create(conn, %{"room" => room_params}) do
-    changeset = Room.changeset(%Room{}, room_params)
-
-    case Repo.insert(changeset) do
+    changesets = Room.changesets(%Room{}, room_params)
+    case Repo.transaction(changesets) do
       {:ok, _room} ->
         conn
         |> put_flash(:info, "Room created successfully.")
         |> redirect(to: room_path(conn, :index))
-      {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+      {:error, :room, changesets} ->
+        render(conn, "new.html", changesets: changesets)
     end
   end
 
