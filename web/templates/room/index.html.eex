@@ -5,7 +5,6 @@
     <tr>
       <th>Name</th>
       <th>Plan</th>
-      <th>Whiteboard</th>
 
       <th></th>
     </tr>
@@ -15,7 +14,6 @@
     <tr>
       <td><%= room.name %></td>
       <td><%= room.plan %></td>
-      <td><%= room.whiteboard %></td>
 
       <td class="text-right">
         <%= link "Show", to: room_path(@conn, :show, room), class: "btn btn-default btn-xs" %>
