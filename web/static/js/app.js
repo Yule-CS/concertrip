@@ -11,11 +11,38 @@
 //
 // If you no longer want to use a dependency, remember
 // to also remove its path from "config.paths.watched".
-import "phoenix_html"
-
+//import 'phoenix_html'
+// require('bootstrap');
 // Import local files
 //
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
 
-// import socket from "./socket"
+import socket from './socket'
+
+
+import React                    from 'react';
+import ReactDOM                 from 'react-dom';
+// import { browserHistory }       from 'react-router';
+// import configureStore           from './store';
+// import Root                     from './containers/root';
+
+// const store  = configureStore(browserHistory);
+//
+// const target = document.getElementById('main_container');
+// const node = <Root routerHistory={browserHistory} store={store}/>;
+
+var Index = React.createClass({
+  render: function () {
+    return (
+      <div>
+        <p>あああ</p>
+      </div>
+    );
+  }
+})
+
+ReactDOM.render(
+  <Index />,
+  document.getElementById('main_container')
+);
