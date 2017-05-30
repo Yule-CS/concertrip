@@ -6,12 +6,12 @@ defmodule Concertrip.RoomController do
 
   def index(conn, _params) do
     rooms = Repo.all(Room)
-    render(conn, "index.html", rooms: rooms)
+    render(conn, "index.json", rooms: rooms)
   end
 
   def new(conn, _params) do
     changeset = Room.changeset(%Room{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.json", changeset: changeset)
   end
 
   def create(conn, %{"room" => room_params}) do
@@ -22,19 +22,19 @@ defmodule Concertrip.RoomController do
         |> put_flash(:info, "Room created successfully.")
         |> redirect(to: room_path(conn, :index))
       {:error, :room, changesets} ->
-        render(conn, "new.html", changesets: changesets)
+        render(conn, "new.json", changesets: changesets)
     end
   end
 
   def show(conn, %{"id" => id}) do
     room = Repo.get!(Room, id)
-    render(conn, "show.html", room: room)
+    render(conn, "show.json", room: room)
   end
 
   def edit(conn, %{"id" => id}) do
     room = Repo.get!(Room, id)
     changeset = Room.changeset(room)
-    render(conn, "edit.html", room: room, changeset: changeset)
+    render(conn, "edit.json", room: room, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "room" => room_params}) do
@@ -47,7 +47,7 @@ defmodule Concertrip.RoomController do
         |> put_flash(:info, "Room updated successfully.")
         |> redirect(to: room_path(conn, :show, room))
       {:error, changeset} ->
-        render(conn, "edit.html", room: room, changeset: changeset)
+        render(conn, "edit.json", room: room, changeset: changeset)
     end
   end
 
