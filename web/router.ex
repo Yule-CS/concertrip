@@ -15,13 +15,15 @@ defmodule Concertrip.Router do
 
   scope "/", Concertrip do
     pipe_through :browser # Use the default browser stack
-
-    get "/", RoomController, :index
-    resources "/rooms", RoomController
+    get "/", PageController, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", Concertrip do
-  #   pipe_through :api
-  # end
+  scope "/api", Concertrip do
+   pipe_through :api
+   scope "/v1" do
+     resources "/rooms", RoomController do
+       resources "/whiteboards", WhiteboardController
+     end
+   end
+  end
 end
