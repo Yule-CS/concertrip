@@ -18,12 +18,9 @@ defmodule Concertrip.Router do
     get "/", PageController, :index
   end
 
-  scope "/api", Concertrip do
-   pipe_through :api
-   scope "/v1" do
-     resources "/rooms", RoomController do
-       resources "/whiteboards", WhiteboardController
-     end
-   end
-  end
+  forward "/api", Absinthe.Plug,
+    schema: Concertrip.Schema
+
+  forward "/graphiql", Absinthe.Plug.GraphiQL,
+    schema: Concertrip.Schema
 end
