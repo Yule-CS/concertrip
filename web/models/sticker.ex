@@ -4,17 +4,19 @@ defmodule Concertrip.Sticker do
   schema "stickers" do
     field :url, :string
     field :title, :string
-    belongs_to :whitedoard, Concertrip.Whitedoard
+    belongs_to :whiteboard, Concertrip.Whiteboard
 
     timestamps()
   end
+
+  @required_params ~w(url title, whiteboard_id)
 
   @doc """
   Builds a changeset based on the `struct` and `params`.
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:url, :title])
-    |> validate_required([:url, :title])
+    |> cast(params, @required_params)
+    |> validate_required(@required_params)
   end
 end
