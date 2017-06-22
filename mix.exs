@@ -19,8 +19,10 @@ defmodule Concertrip.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Concertrip, []},
-     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :faker, ]]
+     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger,
+                    :gettext, :phoenix_ecto, :postgrex, :absinthe,
+                    :absinthe_plug, :poison, :faker, :absinthe_ecto,
+                  ]]
   end
 
   # Specifies which paths to compile per environment.
@@ -40,6 +42,10 @@ defmodule Concertrip.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:espec_phoenix, "~> 0.6.8", only: :test},
+     {:absinthe, "~> 1.3.0"},
+     {:absinthe_plug, "~> 1.3.0"},
+     {:absinthe_ecto, git: "https://github.com/absinthe-graphql/absinthe_ecto.git"},
+     {:poison, "~> 2.0"},
      {:faker, "~> 0.8"}
    ]
   end
