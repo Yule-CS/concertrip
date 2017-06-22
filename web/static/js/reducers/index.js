@@ -1,8 +1,9 @@
 import { combineReducers }  from 'redux';
 import { routeReducer }     from 'react-router-redux';
-import session              from './session';
+import whiteboard           from './whiteboard';
 
-export default combineReducers({
-  routing: routeReducer,
-  session: session,
+const rootReducer = combineReducers({
+  whiteboard
 });
+
+export default rootReducer
