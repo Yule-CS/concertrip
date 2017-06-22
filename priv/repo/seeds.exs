@@ -1,11 +1,26 @@
-# Script for populating the database. You can run it as:
-#
-#     mix run priv/repo/seeds.exs
-#
-# Inside the script, you can read and write to any of your
-# repositories directly:
-#
-#     Concertrip.Repo.insert!(%Concertrip.SomeModel{})
-#
-# We recommend using the bang functions (`insert!`, `update!`
-# and so on) as they will fail if something goes wrong.
+alias Concertrip.Repo
+alias Concertrip.Room
+alias Concertrip.Whiteboard
+
+Repo.insert!(%Room{name: "room1", plan: 1})
+Repo.insert!(%Room{name: "room2", plan: 1})
+
+for i <- 1..2 do
+  Room |> Repo.get(i)
+       |> Ecto.build_assoc(:whiteboard)
+       |> Repo.insert!
+end
+
+for _ <- 1..5 do
+  Repo.get(Whiteboard, 1)
+    |> Ecto.build_assoc(:stickers,
+         url: Faker.Internet.url,
+         title: Faker.Name.title)
+    |> Repo.insert!
+
+  Repo.get(Whiteboard, 2)
+    |> Ecto.build_assoc(:stickers,
+         url: Faker.Internet.url,
+         title: Faker.Name.title)
+    |> Repo.insert!
+end

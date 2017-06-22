@@ -20,7 +20,7 @@ defmodule Concertrip.Mixfile do
   def application do
     [mod: {Concertrip, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex]]
+                    :phoenix_ecto, :postgrex, :faker, ]]
   end
 
   # Specifies which paths to compile per environment.
@@ -40,6 +40,7 @@ defmodule Concertrip.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:espec_phoenix, "~> 0.6.8", only: :test},
+     {:faker, "~> 0.8"}
    ]
   end
 
