@@ -1,9 +1,8 @@
-import { combineReducers }  from 'redux';
-import { routeReducer }     from 'react-router-redux';
-import whiteboard           from './whiteboard';
+import { combineReducers } from 'redux'
+import whiteboard from './whiteboard'
 
 const rootReducer = combineReducers({
-  whiteboard
-});
+  whiteboard,
+})
 
 export default rootReducer

@@ -1,9 +1,8 @@
-import React                    from 'react';
-import ReactDOM                 from 'react-dom';
-import Index                    from './componets/room';
-import {Provider}               from 'react-redux';
-import rootReducer              from './reducers/index'
-import configureStore           from './store/configureStore';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import Index from './componets/room'
+import configureStore from './store/configureStore'
 
 let store = configureStore()
 
@@ -12,4 +11,4 @@ ReactDOM.render(
     <Index />
   </Provider>,
   document.getElementById('main_container')
-);
+)
