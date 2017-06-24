@@ -1,12 +1,10 @@
-import React                    from 'react'
-import ReactDOM                 from 'react-dom'
-import { connect }              from 'react-redux'
-import { fetchWhiteboard }      from '../action/whiteboard'
-import { bindActionCreators }   from 'redux'
+import React from 'react'
+import { connect } from 'react-redux'
+import { fetchWhiteboard } from '../action/whiteboard'
 
 class Whiteboard extends React.Component {
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.fetch()
   }
 
@@ -14,36 +12,34 @@ class Whiteboard extends React.Component {
     const ids = this.props.whiteboard.ids
     return (
       <div>
-      <ul>
-        {(() => {
-          if(ids.length > 0){
-            return ids.map(id => <li key={id}>{id}</li>)
-          }
-        })()}
-      </ul>
-        <button onClick={e => {
+        <ul>
+          {(() => {
+            if (ids.length > 0) {
+              return ids.map(id => <li key={id}>{id}</li>)
+            }
+            return []
+          })()}
+        </ul>
+        <button onClick={() => {
           this.props.fetch()
-        }}>
+        }}
+        >
           fetch
         </button>
       </div>
-    );
+    )
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    whiteboard: state.whiteboard
-  }
-}
+const mapStateToProps = state => ({
+  whiteboard: state.whiteboard,
+})
 
-const mapDispatchToProps = dispatch => {
-  return {
-    fetch: () => dispatch(fetchWhiteboard())
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  fetch: () => dispatch(fetchWhiteboard()),
+})
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Whiteboard)
