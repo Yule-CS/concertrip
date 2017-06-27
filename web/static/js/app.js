@@ -1,14 +1,23 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
-import Index from './componets/room'
-import configureStore from './store/configureStore'
+import { ApolloClient, ApolloProvider, createNetworkInterface } from 'react-apollo'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import Room from './componets/room'
 
-let store = configureStore()
+const client = new ApolloClient({
+  networkInterface: createNetworkInterface({ uri: '/api' }),
+})
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Index />
-  </Provider>,
+  <ApolloProvider client={client}>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={Room} />
+        <Route render={() => {
+          return <p>Not Found</p>
+        }} />
+      </Switch>
+    </BrowserRouter>
+  </ApolloProvider>,
   document.getElementById('main_container')
 )

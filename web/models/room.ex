@@ -11,7 +11,7 @@ defmodule Concertrip.Room do
     timestamps()
   end
 
-  #TODO service patternに削り出すか調査する。
+  # TODO service patternに削り出すか調査する。
   def changesets(struct, params) do
     Multi.new
     |> Multi.insert(:room, changeset(struct, params))

@@ -13,14 +13,15 @@ defmodule Concertrip.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", Concertrip do
-    pipe_through :browser # Use the default browser stack
-    get "/", PageController, :index
-  end
+  forward "/graphiql", Absinthe.Plug.GraphiQL,
+    schema: Concertrip.Schema
 
+  # Is it necessary to go through api pipline for parsing json?
   forward "/api", Absinthe.Plug,
     schema: Concertrip.Schema
 
-  forward "/graphiql", Absinthe.Plug.GraphiQL,
-    schema: Concertrip.Schema
+  scope "/", Concertrip do
+    pipe_through :browser # Use the default browser stack
+    get "/*path", PageController, :index
+  end
 end
