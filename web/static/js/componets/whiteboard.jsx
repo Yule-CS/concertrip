@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-//import { connect } from 'react-redux'
-//import { fetchWhiteboard } from '../action/whiteboard'
+// import { connect } from 'react-redux'
+// import { fetchWhiteboard } from '../action/whiteboard'
 
-export default class Whiteboard extends React.Component {
+export default class Whiteboard extends React.PureComponent {
   render() {
     return (
       <div>
@@ -13,7 +13,9 @@ export default class Whiteboard extends React.Component {
   }
 }
 Whiteboard.propsTypes = {
-  whiteboard: PropTypes.object
+  whiteboard: PropTypes.shape({
+    id: PropTypes.number,
+  }),
 }
 
 // const mapStateToProps = state => ({
