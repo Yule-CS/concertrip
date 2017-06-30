@@ -2,9 +2,15 @@ defmodule Concertrip.Schema.Types do
   use Absinthe.Schema.Notation
   use Absinthe.Ecto, repo: Concertrip.Repo
 
+  object :sticker do
+    field :id, :id
+    field :url, :string
+    field :title, :string
+  end
+
   object :whiteboard do
     field :id, :id
-    field :room, :room, resolve: assoc(:room)
+    field :stickers, list_of(:sticker), resolve: assoc(:stickers)
   end
 
   object :room do
