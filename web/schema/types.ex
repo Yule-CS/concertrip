@@ -8,6 +8,11 @@ defmodule Concertrip.Schema.Types do
     field :title, :string
   end
 
+  input_object :sticker_input do
+    field :url, non_null(:string)
+    field :title, non_null(:string)
+  end
+
   object :whiteboard do
     field :id, :id
     field :stickers, list_of(:sticker), resolve: assoc(:stickers)

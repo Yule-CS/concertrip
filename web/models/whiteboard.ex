@@ -13,7 +13,7 @@ defmodule Concertrip.Whiteboard do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:room_id])
-    |> validate_required([:room_id])
+    |> cast(params, [:id, :room_id])
+    |> cast_assoc(:stickers)
   end
 end
