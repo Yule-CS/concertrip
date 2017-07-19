@@ -9,7 +9,7 @@ defmodule Concertrip.Sticker do
     timestamps()
   end
 
-  @required_params ~w(url title, whiteboard_id)
+  @required_params ~w(url title)a
 
   @doc """
   Builds a changeset based on the `struct` and `params`.
