@@ -1,32 +1,80 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
-// import { connect } from 'react-redux'
-// import { fetchWhiteboard } from '../action/whiteboard'
+import { gql, graphql } from 'react-apollo'
+import Sticker from './sticker'
 
-export default class Whiteboard extends React.PureComponent {
+class Whiteboard extends React.PureComponent {
+  state = {
+    title: '',
+    url: '',
+  }
+
+  handleSave = () => {
+    const { title, url } = this.state
+    const room = this.props.roomId
+    console.log(withRouter)
+    console.log(this)
+    this.props.mutate({ variables: { title, url, room } })
+      .then(() => {
+        this.props.history.replace('/')
+      })
+  }
+
   render() {
     return (
       <div>
-         Whiteboard: {this.props.whiteboard.id}
+        <div>
+          Whiteboard: {this.props.whiteboard.id}
+        </div>
+        <div>
+          {this.props.whiteboard.stickers.map(sticker =>
+            <Sticker key={sticker.id} sticker={sticker} />,
+         )}
+        </div>
+        <div>
+          <input
+            value={this.state.title}
+            placeholder="Title"
+            onChange={e => this.setState({ title: e.target.value })}
+          />
+          <input
+            value={this.state.url}
+            placeholder="Url"
+            onChange={e => this.setState({ url: e.target.value })}
+          />
+          <button onClick={this.handleSave}>Submit</button>
+        </div>
       </div>
     )
   }
 }
-Whiteboard.propsTypes = {
+
+Whiteboard.propTypes = {
+  history: PropTypes.object.isRequired,
+  mutate: PropTypes.func.isRequired,
+  roomId: PropTypes.string.isRequired,
   whiteboard: PropTypes.shape({
-    id: PropTypes.number,
-  }),
+    id: PropTypes.string,
+    stickers: PropTypes.array,
+  }).isRequired,
 }
 
-// const mapStateToProps = state => ({
-//   whiteboard: state.whiteboard,
-// })
-//
-// const mapDispatchToProps = dispatch => ({
-//   fetch: () => dispatch(fetchWhiteboard()),
-// })
-//
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps,
-// )(Whiteboard)
+const createStickerMutation = gql`
+  mutation createSticker($room: ID, $title: String!, $url: String!) {
+      createSticker(room: $room,
+        stickerSet: [{
+          title: $title
+          url: $url
+        }]
+      ) {
+        id
+        title
+        url
+      }
+  }
+`
+
+const createStickerWithMutation = graphql(createStickerMutation)(withRouter(Whiteboard))
+
+export default createStickerWithMutation
