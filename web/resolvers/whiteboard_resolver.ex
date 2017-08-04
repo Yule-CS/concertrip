@@ -2,7 +2,7 @@ defmodule Concertrip.WhiteboardResolver do
   alias Concertrip.{Repo, Whiteboard, Sticker}
   import Ecto.Query
 
-  def update(%{room: id, sticker_set: params}, _info) do
+  def upsert_attributes(%{room: id, sticker_set: params}, _info) do
     changeset = Whiteboard
     |> Repo.get_by(room_id: id)
     |> Repo.preload(stickers: retieve_associtation_with(params))

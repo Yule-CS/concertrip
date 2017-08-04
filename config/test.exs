@@ -15,5 +15,6 @@ config :concertrip, Concertrip.Repo,
   username: "postgres",
   password: "postgres",
   database: "concertrip_test",
+  ownership_timeout: 600_000,
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox

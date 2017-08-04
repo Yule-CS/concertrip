@@ -1,7 +1,6 @@
 defmodule Concertrip.Room do
   use Concertrip.Web, :model
-  alias Concertrip.{Whiteboard, Repo}
-  alias Ecto.Multi
+  alias Concertrip.Whiteboard
 
   schema "rooms" do
     field :name, :string
@@ -9,17 +8,6 @@ defmodule Concertrip.Room do
     has_one :whiteboard, Whiteboard
 
     timestamps()
-  end
-
-  # TODO service patternに削り出すか調査する。
-  def changesets(struct, params) do
-    Multi.new
-    |> Multi.insert(:room, changeset(struct, params))
-    |> Multi.run(:whiteboard, fn %{room: room} ->
-      whiteboard_changeset = %Whiteboard{room_id: room.id}
-        |> Whiteboard.changeset()
-      Repo.insert(whiteboard_changeset)
-    end)
   end
 
   @required_fields ~w(name plan)

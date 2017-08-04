@@ -10,7 +10,7 @@ defmodule Concertrip.Mixfile do
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      aliases: aliases(),
-     preferred_cli_env: [espec: :test],
+     preferred_cli_env: [test: :test],
      deps: deps()]
   end
 
@@ -41,13 +41,13 @@ defmodule Concertrip.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
-     {:espec_phoenix, "~> 0.6.8", only: :test},
      {:absinthe, "~> 1.3.0"},
      {:absinthe_plug, "~> 1.3.0"},
      {:absinthe_ecto, git: "https://github.com/absinthe-graphql/absinthe_ecto.git"},
      {:poison, "~> 2.0"},
      {:faker, "~> 0.8"},
-     {:credo, "~> 0.8", only: [:dev, :test], runtime: false}
+     {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
+     {:cortex, "~> 0.1", only: [:dev, :test]},
    ]
   end
 
