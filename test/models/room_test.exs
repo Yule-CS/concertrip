@@ -3,7 +3,7 @@ defmodule Concertrip.RoomTest do
 
   alias Concertrip.Room
 
-  @valid_attrs %{name: "some content", plan: 42, whiteboard: 42}
+  @valid_attrs %{name: "some content", plan: 1, whiteboard: 1}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do

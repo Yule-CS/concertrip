@@ -3,7 +3,7 @@ defmodule Concertrip.Whiteboard do
 
   schema "whiteboards" do
     belongs_to :room, Concertrip.Room
-    has_many :stickers, Concertrip.Sticker
+    has_many :stickers, Concertrip.Sticker, on_replace: :mark_as_invalid
 
     timestamps()
   end

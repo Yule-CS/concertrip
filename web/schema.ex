@@ -13,7 +13,7 @@ defmodule Concertrip.Schema do
       arg :room, non_null(:id)
       arg :sticker_set, list_of(non_null(:sticker_input))
 
-      resolve &Concertrip.WhiteboardResolver.update/2
+      resolve &Concertrip.WhiteboardResolver.upsert_attributes/2
     end
   end
 end
