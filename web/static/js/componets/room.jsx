@@ -19,7 +19,7 @@ class Room extends React.PureComponent {
         </div>
         <div>
           {this.props.data.rooms.map(room =>
-            <Whiteboard key={room.id} whiteboard={room.whiteboard} />,
+            <Whiteboard key={room.id} roomId={room.id} whiteboard={room.whiteboard} />,
           )}
         </div>
       </div>
@@ -39,8 +39,14 @@ const RoomQuery = gql`
   query RoomQuery {
     rooms {
       name
+      id
       whiteboard {
         id
+        stickers {
+          id
+          title
+          url
+        }
       }
     }
   }

@@ -6,6 +6,7 @@ import Room from './componets/room'
 
 const client = new ApolloClient({
   networkInterface: createNetworkInterface({ uri: '/api' }),
+  dataIdFromObject: o => o.id,
 })
 
 ReactDOM.render(
