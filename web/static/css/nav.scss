@@ -1,0 +1,44 @@
+.tp-Nav {
+  display: flex;
+  justify-content: center;
+  flex-flow: row nowrap;
+  align-items: baseline;
+  div {
+    text-align: center;
+    padding: 20px 0px;
+  }
+  a {
+    text-decoration: none;
+  }
+}
+
+.tp-Nav_Center {
+  flex-grow: 1;
+  font-size: 18px;
+  p {
+    color: palevioletred;
+  }
+}
+
+.tp-Nav_Right {
+  width: 30%;
+  font-size: 13px;
+  ul {
+    display: flex;
+    justify-content: space-around;
+    flex-flow: row nowrap;
+  }
+  li {
+    padding: 8px 20px;
+  }
+  p {
+    color: mediumaquamarine;
+  }
+  p:hover {
+      color: cornflowerblue;
+    }
+}
+
+.tp-Nav_Left {
+   width: 30%;
+}

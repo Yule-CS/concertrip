@@ -2,6 +2,7 @@
 
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var webpack = require('webpack');
 
 function join(dest) { return path.resolve(__dirname, dest); }
@@ -11,7 +12,7 @@ function web(dest) { return join('web/static/' + dest); }
 var config = module.exports = {
   entry: {
     application: [
-      web('css/app.sass'),
+      web('css/app.scss'),
       web('js/app.js'),
     ],
   },
@@ -39,7 +40,7 @@ var config = module.exports = {
         },
       },
       {
-        test: /\.sass$/,
+        test: /\.scss$/,
         loader: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: ['css-loader', 'sass-loader'],
@@ -57,6 +58,13 @@ var config = module.exports = {
 
   plugins: [
     new ExtractTextPlugin('css/app.css'),
+    new CopyWebpackPlugin([
+      {
+        from: web('assets'),
+        to: join('priv/static'),
+        ignore: [".DS_Store"]
+      }
+    ]),
   ],
 };
 
