@@ -1,0 +1,76 @@
+.home-Main {
+  height: 600px;
+  width: 100%;
+  background-image: url("/images/sea-with-she.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  display: flex;
+  justify-content: center;
+}
+
+.home-Main_Form {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-Main_Input {
+  background-color: white;
+  opacity: 0.8;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 3px;
+  margin: 5px;
+
+  label {
+    padding: 5px;
+  }
+  input {
+    border: none;
+    font-size: 14px;
+    color: palevioletred;
+    margin-left: 5px;
+    width: 200px;
+    height: 30px;
+    vertical-align: baseline;
+  }
+}
+
+.home-Main_Button {
+  color: white;
+  border-color: gray;
+  background-color: palevioletred;
+  text-align: center;
+  border-radius: 3px;
+  margin: 0 5px;
+  width: 100px;
+  height: 35px;
+}
+
+/// TODO improve home-Info desing
+.home-Info {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  flex-flow: row wrap;
+}
+
+.home-Info_Desc {
+  margin: 20px;
+  padding-top: 50px;
+  padding-bottom: 150px;
+  display: flex;
+}
+
+.home-Info_Example {
+  margin: 20px;
+  padding-top: 150px;
+  padding-bottom: 50px;
+  display: flex;
+  img {
+    margin: 0 10px;
+  }
+}
