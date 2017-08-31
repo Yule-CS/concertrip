@@ -46,7 +46,7 @@ defmodule Concertrip.Mixfile do
      {:absinthe_ecto, git: "https://github.com/absinthe-graphql/absinthe_ecto.git"},
      {:poison, "~> 2.0"},
      {:faker, "~> 0.8"},
-     {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
+     {:credo, "~> 0.8.6", only: [:dev, :test], runtime: false},
      {:cortex, "~> 0.1", only: [:dev, :test]},
    ]
   end
