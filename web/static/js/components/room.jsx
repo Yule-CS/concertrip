@@ -35,7 +35,7 @@ Room.propTypes = {
   }).isRequired,
 }
 
-const RoomQuery = gql`
+export const RoomQuery = gql`
   query RoomQuery {
     rooms {
       name

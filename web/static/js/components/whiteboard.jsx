@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { gql, graphql } from 'react-apollo'
 import Sticker from './sticker'
+import { RoomQuery } from './room'
 
 class Whiteboard extends React.PureComponent {
   state = {
@@ -15,10 +16,12 @@ class Whiteboard extends React.PureComponent {
     const room = this.props.roomId
     console.log(withRouter)
     console.log(this)
-    this.props.mutate({ variables: { title, url, room } })
-      .then(() => {
-        this.props.history.replace('/')
-      })
+    this.props.mutate({
+      variables: { title, url, room },
+      refetchQueries: [{
+        query: RoomQuery,
+      }],
+    })
   }
 
   render() {
