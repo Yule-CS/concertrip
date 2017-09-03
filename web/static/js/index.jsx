@@ -2,12 +2,12 @@ import React from 'react'
 
 export default class Index extends React.PureComponent {
   constructor(props) {
-    super(props);
-    this.state = {value: ''};
-    this.handleChange = this.handleChange.bind(this);
+    super(props)
+    this.state = { value: '' }
+    this.handleChange = this.handleChange.bind(this)
   }
   handleChange(event) {
-    this.setState({value: event.target.value});
+    this.setState({ value: event.target.value })
   }
 
   render() {

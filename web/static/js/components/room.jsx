@@ -12,15 +12,14 @@ class Room extends React.PureComponent {
       return (<div>An unexpected error occurred</div>)
     }
 
+    const room = this.props.data.room
     return (
       <div>
         <div>
-          there are {this.props.data.rooms.length} whiteboard in your room
+          there are {this.props.data.room.length} whiteboard in your room
         </div>
         <div>
-          {this.props.data.rooms.map(room =>
-            <Whiteboard key={room.id} roomId={room.id} whiteboard={room.whiteboard} />,
-          )}
+          <Whiteboard key={room.id} roomId={room.id} whiteboard={room.whiteboard} />,
         </div>
       </div>
     )
@@ -28,16 +27,21 @@ class Room extends React.PureComponent {
 }
 
 Room.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      name: PropTypes.string,
+    }),
+  }).isRequired,
   data: PropTypes.shape({
     loading: PropTypes.bool,
     error: PropTypes.object,
-    rooms: PropTypes.array,
+    room: PropTypes.object,
   }).isRequired,
 }
 
 export const RoomQuery = gql`
-  query RoomQuery {
-    rooms {
+  query RoomQuery($name: String!) {
+    room(name: $name) {
       name
       id
       whiteboard {
@@ -51,5 +55,9 @@ export const RoomQuery = gql`
     }
   }
 `
-const RoomWithData = graphql(RoomQuery)(Room)
+const RoomWithData = graphql(RoomQuery, {
+  options: ownProps => ({
+    variables: { name: ownProps.match.params.name },
+  }),
+})(Room)
 export default RoomWithData

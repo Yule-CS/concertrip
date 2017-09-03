@@ -18,10 +18,8 @@ ReactDOM.render(
         <Nav />
         <Switch>
           <Route exact path="/" component={Index} />
-          <Route path="/room" component={Room} />
-          <Route render={() => {
-            return <p>Not Found</p>
-          }} />
+          <Route path="/rooms/:name" component={Room} />
+          <Route render={() => <p>Not Found</p>} />
         </Switch>
       </div>
     </BrowserRouter>
