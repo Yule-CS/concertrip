@@ -9,8 +9,9 @@ defmodule Concertrip.Schema.Types do
   end
 
   input_object :sticker_input do
+    field :id, :id
     field :url, non_null(:string)
-    field :title, non_null(:string)
+    field :title, :string
   end
 
   object :whiteboard do

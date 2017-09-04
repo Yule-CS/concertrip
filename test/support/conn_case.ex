@@ -26,6 +26,7 @@ defmodule Concertrip.ConnCase do
       import Ecto.Query
 
       import Concertrip.Router.Helpers
+      import Concertrip.GraphqlHelper
 
       # The default endpoint for testing
       @endpoint Concertrip.Endpoint

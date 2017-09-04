@@ -4,7 +4,7 @@ defmodule Concertrip.WhiteboardTest do
   alias Concertrip.Whiteboard
 
   @valid_attrs %{stickers: [%{title: "test", url: "test"}]}
-  @invalid_attrs %{test: ""}
+  #@invalid_attrs %{test: ""}
 
   test "changeset with valid attributes" do
     changeset = Whiteboard.changeset(%Whiteboard{}, @valid_attrs)
