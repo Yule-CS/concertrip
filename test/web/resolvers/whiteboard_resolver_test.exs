@@ -17,8 +17,8 @@ defmodule Concertrip.WhiteboardResolverTest do
     }
   """
 
-  defp create_room do
-    %Room{name: "room", plan: 1}
+  defp create_room(name \\ "room") do
+    %Room{name: name, plan: 1}
     |> Repo.insert!
     |> Ecto.build_assoc(:whiteboard)
     |> Repo.insert!
@@ -55,7 +55,7 @@ defmodule Concertrip.WhiteboardResolverTest do
       stickers = room.id
                  |> create_stickers
                  |> Stream.map(&Map.take(&1, [:id]))
-                 |> Enum.map(&Map.merge(&1,%{title: "expected", url: "expected"}))
+                 |> Enum.map(&Map.merge(&1, %{title: "expected", url: "expected"}))
 
       variables = Map.merge(%{room: room.id}, %{sticker_input: stickers})
 
@@ -74,12 +74,12 @@ defmodule Concertrip.WhiteboardResolverTest do
 
     test "upsert_attributes/2 ignore sticker id which belongs to other rooms.
           Then create stickers based on new serial id", context do
-      room1 = create_room
-      room2 = create_room
+      room1 = create_room("room1")
+      room2 = create_room("room2")
       stickers = room2.id
                  |> create_stickers
                  |> Stream.map(&Map.take(&1, [:id]))
-                 |> Enum.map(&Map.merge(&1,%{title: "expected", url: "expected"}))
+                 |> Enum.map(&Map.merge(&1, %{title: "expected", url: "expected"}))
 
       variables = Map.merge(%{room: room1.id}, %{sticker_input: stickers})
 

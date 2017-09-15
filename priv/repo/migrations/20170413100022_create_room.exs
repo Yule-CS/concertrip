@@ -10,5 +10,6 @@ defmodule Concertrip.Repo.Migrations.CreateRoom do
       timestamps()
     end
 
+    create index(:rooms, [:name], unique: true)
   end
 end
