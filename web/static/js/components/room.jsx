@@ -1,22 +1,32 @@
 import React from 'react'
-import { gql, graphql } from 'react-apollo'
+import { gql, graphql, compose } from 'react-apollo'
 import PropTypes from 'prop-types'
 import Whiteboard from './whiteboard'
 
 class Room extends React.PureComponent {
   render() {
-    if (this.props.data.loading) {
+    const { history, mutate } = this.props
+    const { room, loading, error } = this.props.data
+    if (loading) {
       return (<div>Loading</div>)
     }
-    if (this.props.data.error) {
-      return (<div>An unexpected error occurred</div>)
+    if (error) {
+      switch (error.graphQLErrors[0].code) {
+        case 'not_found':
+          mutate()
+          break
+        case 'bad_request':
+          history.replace('/')
+          break
+        default:
+          return (<div>Internal Server Error</div>)
+      }
     }
 
-    const room = this.props.data.room
     return (
       <div>
         <div>
-          there are {this.props.data.room.length} whiteboard in your room
+          there are {room.length} whiteboard in your room
         </div>
         <div>
           <Whiteboard key={room.id} roomId={room.id} whiteboard={room.whiteboard} />,
@@ -27,17 +37,29 @@ class Room extends React.PureComponent {
 }
 
 Room.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      name: PropTypes.string,
-    }),
-  }).isRequired,
   data: PropTypes.shape({
     loading: PropTypes.bool,
     error: PropTypes.object,
     room: PropTypes.object,
   }).isRequired,
 }
+
+const createRoom = gql`
+  mutation createRoom($name: String!) {
+    createRoom(name: $name){
+      name
+      id
+      whiteboard {
+        id
+        stickers {
+          id
+          title
+          url
+        }
+      }
+    }
+  }
+`
 
 export const RoomQuery = gql`
   query RoomQuery($name: String!) {
@@ -55,9 +77,16 @@ export const RoomQuery = gql`
     }
   }
 `
-const RoomWithData = graphql(RoomQuery, {
-  options: ownProps => ({
-    variables: { name: ownProps.match.params.name },
+const RoomWithData = compose(
+  graphql(createRoom, {
+    options: ownProps => ({
+      variables: { name: ownProps.match.params.name },
+    }),
   }),
-})(Room)
+  graphql(RoomQuery, {
+    options: ownProps => ({
+      variables: { name: ownProps.match.params.name },
+    }),
+  }),
+)(Room)
 export default RoomWithData
