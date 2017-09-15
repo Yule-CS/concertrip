@@ -3,8 +3,9 @@ defmodule Concertrip.Schema do
   import_types Concertrip.Schema.Types
 
   query do
-    field :rooms, list_of(:room) do
-      resolve &Concertrip.RoomResolver.all/2
+    field :rooms, :room do
+      arg :name, non_null(:string)
+      resolve &Concertrip.RoomResolver.find/2
     end
   end
 
