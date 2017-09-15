@@ -14,8 +14,6 @@ class Whiteboard extends React.PureComponent {
   handleSave = () => {
     const { title, url } = this.state
     const room = this.props.roomId
-    console.log(withRouter)
-    console.log(this)
     this.props.mutate({
       variables: { title, url, room },
       refetchQueries: [{

@@ -8,15 +8,16 @@ defmodule Concertrip.WhiteboardResolver do
     |> Repo.preload(stickers: retieve_associtation_with(params))
     |> Whiteboard.changeset(%{stickers: params})
 
-    # TODO how do I retrieve the stciker natually.
-    {:ok, whiteboard} = Repo.update(changeset)
-    {:ok, whiteboard.stickers}
+    case Repo.update(changeset) do
+      {:ok, whiteboard} -> {:ok, whiteboard.stickers}
+      # _ -> #PENDING
+    end
   end
 
-  # TODO ask someone to pass data to macro through pipe
   defp retieve_associtation_with params do
-    from s in Sticker, where: s.id in ^(params
-      |> Enum.map &Map.get(&1, :id)
+    from s in Sticker, where: s.id in ^(
+      params
+      |> Enum.map(&Map.get(&1, :id))
     )
   end
 end
