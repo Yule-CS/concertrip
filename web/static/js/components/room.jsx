@@ -46,7 +46,7 @@ Room.propTypes = {
 
 const createRoom = gql`
   mutation createRoom($name: String!) {
-    createRoom(name: $name){
+    rooms(name: $name){
       name
       id
       whiteboard {
