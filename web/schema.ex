@@ -16,5 +16,10 @@ defmodule Concertrip.Schema do
 
       resolve &Concertrip.WhiteboardResolver.upsert_attributes/2
     end
+    field :rooms, type: :room do
+      arg :name, non_null(:string)
+
+      resolve &Concertrip.RoomResolver.insert/2
+    end
   end
 end
