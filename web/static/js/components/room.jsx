@@ -22,14 +22,13 @@ class Room extends React.PureComponent {
           return (<div>Internal Server Error</div>)
       }
     }
-
     return (
       <div>
         <div>
           there are {room.length} whiteboard in your room
         </div>
         <div>
-          <Whiteboard key={room.id} roomId={room.id} whiteboard={room.whiteboard} />,
+          <Whiteboard key={room.id} room={room} />
         </div>
       </div>
     )
