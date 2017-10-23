@@ -28,7 +28,7 @@ class Whiteboard extends React.PureComponent {
         <div>
           Whiteboard: {this.props.whiteboard.id}
         </div>
-        <div>
+        <div className="whiteboard">
           {this.props.whiteboard.stickers.map(sticker =>
             <Sticker key={sticker.id} sticker={sticker} />,
          )}
