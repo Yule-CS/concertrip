@@ -13,24 +13,30 @@ class Whiteboard extends React.PureComponent {
 
   handleSave = () => {
     const { title, url } = this.state
-    const room = this.props.roomId
+    const roomId = this.props.room.id
+    const roomName = this.props.room.name
     this.props.mutate({
-      variables: { title, url, room },
+      variables: { title, url, room: roomId },
       refetchQueries: [{
         query: RoomQuery,
+        variables: { name: roomName },
       }],
     })
   }
 
   render() {
+    const { whiteboard } = this.props.room
     return (
       <div>
         <div>
-          Whiteboard: {this.props.whiteboard.id}
+          Whiteboard: {whiteboard.id}
         </div>
         <div className="whiteboard">
-          {this.props.whiteboard.stickers.map(sticker =>
-            <Sticker key={sticker.id} sticker={sticker} />,
+          {whiteboard.stickers
+            .slice()
+            .reverse()
+            .map(sticker =>
+              <Sticker key={sticker.id} sticker={sticker} />,
          )}
         </div>
         <div>
@@ -54,10 +60,13 @@ class Whiteboard extends React.PureComponent {
 Whiteboard.propTypes = {
   history: PropTypes.object.isRequired,
   mutate: PropTypes.func.isRequired,
-  roomId: PropTypes.string.isRequired,
-  whiteboard: PropTypes.shape({
-    id: PropTypes.string,
-    stickers: PropTypes.array,
+  room: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.stiring,
+    whiteboard: PropTypes.shape({
+      id: PropTypes.string,
+      stickers: PropTypes.array,
+    }).isRequired,
   }).isRequired,
 }
 
